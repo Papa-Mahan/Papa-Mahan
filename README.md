@@ -1,7 +1,6 @@
 - 👋 Hi, I’m @Papa-Mahan
 - 👀 I’m interested in Cyber Security
 - 🌱 I’m currently learning ...
-- 📫 How to reach me : Papa_Mahan:Instgram
 - ⚡ Fun fact: the sky is blue
 
 <!---
