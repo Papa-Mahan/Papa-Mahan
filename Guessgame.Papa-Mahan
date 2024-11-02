@@ -1,0 +1,20 @@
+guess game code in python with list
+lst = []
+for i in range(5):
+    a = eval(input(f'enter your numbers{i + 1} :'))
+    lst.append(a)
+    if a < 50:
+        print('numbers in range')
+    else :
+        print('numbers out of range')
+        break
+if a in range (50):
+    guess1 = eval(input('enter your first guess :'))
+    guess2 = eval(input('enter your second guess :'))
+    if guess1 and guess2 in lst :
+        print('Great work both guesses were correct')
+    elif guess1 in lst and guess2 not in lst or guess1 not in lst and guess2 in lst:
+        print('Good job one of the guesses were correct')
+    else :
+        print('Maybe you should try next time (Correct guesses0/2)')
+print(lst)
