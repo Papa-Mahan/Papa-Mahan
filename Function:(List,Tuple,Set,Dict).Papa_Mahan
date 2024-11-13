@@ -1,0 +1,32 @@
+set_lst = []
+tup  = ()
+dict = {}
+lst = []
+def data_base():
+    a = eval(input('pick a number between 1 to 4 :'))
+    if a == 1 :
+        for i in range(5):
+            b = eval(input('enter your numbers :'))
+            lst.append(b)
+        print(lst)
+    elif a == 2 :
+        for j in range(5):
+            key = eval(input('enter your keys :'))
+            val = input('enter your vals :')
+            dict[key] = val
+            key, val in dict.items()
+        print(dict)
+    elif a == 3 :
+        new_tup = []
+        for k in range(5):
+            c = input('enter your numbers :')
+            new_tup.append(c)
+        new_tuple = tuple(new_tup)
+        result = tup + new_tuple
+        print(result)
+    elif a == 4 :
+        for z in range(5):
+            d = eval(input('enter your numbers :'))
+            set_lst.append(d)
+        print(set(set_lst))
+data_base()
