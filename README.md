@@ -1,4 +1,4 @@
 - 👋 Hi, I’m @Papa-Mahan
 - 👀 I’m interested in Cyber Security
-- 🌱 I’m currently learning ...
+- 🌱 I’m currently learning: Python 1 and Splunk
 - ⚡ Fun fact: the sky blue 
