@@ -1,0 +1,11 @@
+from random import randint
+def guess_game():
+    guess = randint(1, 10)
+    while True:
+        a = eval(input('enter your guess :'))
+        if a == guess:
+            print('Great job your guess is correct')
+            break
+        else :
+            print('your guess is incorrect try again')
+guess_game()
