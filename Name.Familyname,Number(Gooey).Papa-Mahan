@@ -1,0 +1,28 @@
+from gooey import Gooey,GooeyParser
+@Gooey(program_name='Name familyname number')
+def Name_family_number():
+    bio = GooeyParser(description='Enter your name and family nam e and 2 numbers')
+    bio.add_argument('name', help='Enter your name please :')
+    bio.add_argument('familyname', help='Enter your family name please :')
+    bio.add_argument('num1', help='Enter your first num ber please :')
+    bio.add_argument('num2', help='Enter your second num ber please :')
+    bio.add_argument('Mathematicaloperations', help='Enter your Mathematical operations num ber please :')
+    args = bio.parse_args()
+    if int(args.num1) and int(args.num2) in range(9, 100):
+        if args.Mathematicaloperations == '+' :
+            a = int(args.num1) + int(args.num2)
+            print(a)
+        elif args.Mathematicaloperations == '-' :
+            b = int(args.num1) - int(args.num2)
+            print(b)
+        elif args.Mathematicaloperations == '*' :
+            c = int(args.num1) * int(args.num2) 
+            print(c)
+        elif args.Mathematicaloperations == '/' :
+            d = int(args.num1) / int(args.num2) 
+            print(d)
+    else:
+        print('your numbers is out of range!!!')
+    print(args.name)
+    print(args.familyname)
+Name_family_number()
