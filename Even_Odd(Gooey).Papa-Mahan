@@ -1,0 +1,26 @@
+from gooey import Gooey, GooeyParser
+@Gooey(program_name='Even or Odd')
+def Even_odd():
+    number1 = GooeyParser(description='Even or Odd game')
+    number1.add_argument('num1', help='enter your numbers')
+    number1.add_argument('num2', help='enter your numbers')
+    number1.add_argument('num3', help='enter your numbers')
+    number1.add_argument('num4', help='enter your numbers')
+    args = number1.parse_args()
+    if int(args.num1) % 2 == 0:
+        print('the number that you entered is Even')
+    else:
+        print('the number that you enterd is Odd')
+    if int(args.num2) % 2 == 0:
+        print('the number that you entered is Even')
+    else:
+        print('the number that you enterd is Odd')
+    if int(args.num3) % 2 == 0:
+        print('the number that you entered is Even')
+    else:
+        print('the number that you enterd is Odd')
+    if int(args.num4) % 2 == 0:
+        print('the number that you entered is Even')
+    else:
+        print('the number that you enterd is Odd')
+Even_odd()
