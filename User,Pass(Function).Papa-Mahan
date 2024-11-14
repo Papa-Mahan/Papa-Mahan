@@ -1,0 +1,15 @@
+dict = {}
+def auth():
+    for i in range(2):
+        user = input('enter your username :')
+        passwrod = input('enter your password :')
+        dict[user] = passwrod
+        user, passwrod in dict.items()
+        if passwrod.isdigit():
+            continue
+        else:
+            print('password must be a number!!!')
+            break
+    if passwrod.isdigit():
+        print(f'the username and password enters :{dict}')
+auth()
