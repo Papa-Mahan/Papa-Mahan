@@ -1,0 +1,33 @@
+from colorama import Fore,Style,Back
+def multi():
+    lst = []
+    input1 = eval(input('enter your first number :'))
+    input2 = eval(input('enter your second number :'))
+    if input1 and input2 in range(6, 11):
+        for i in range(1, input1+1):
+            if i == 2 :
+                continue 
+            else :
+                for j in range(1, input2+1):
+                    if j == 2 :
+                        continue
+                    elif j == 4 :
+                        print(Fore.RED + str(i*j),end=' ' + Style.RESET_ALL )
+                        lst.append(i*j)
+                    else :
+                        print(Fore.YELLOW + str(i*j) , end=' ' + Style.RESET_ALL)
+                        lst.append(i*j)
+            print()
+    else:
+        print('numbers out of range!!!!!')
+    return(lst)
+result = multi()
+print(result)
+
+def func2(result):
+    lst2 = []
+    for z in result:
+            if z % 2 == 0 :
+                lst2.append(z)
+    print(lst2)
+func2(result)
