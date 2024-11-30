@@ -1,0 +1,27 @@
+def mahan():
+        username = input('enter your username :')
+        family = input('enter your family :')
+        address = input('enter your address :')
+        code_meli = str(input('enter your id :'))
+        with open ('bank.txt', 'w') as a :
+            a.write(str(username))
+            a.write('\n')
+            a.write(str(family))
+            a.write('\n')
+            a.write(str(address))
+            a.write('\n')
+            a.write(str(code_meli))
+        while True :
+            choose = eval(input('enter your number :'))
+            if choose == 1 :
+                print(f'this is your Username ---> {username} and this is your Family Name ---> {family}')
+            elif choose == 2 :
+                print(f'this is your Address ---> {address} and this is your ID ---> {code_meli}')
+            elif choose == 3 :
+                print('App is closing')
+                break
+            else:
+                print('in sert number is out of range!!!!')
+mahan()
+
+        
