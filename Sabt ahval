@@ -1,0 +1,29 @@
+#Sabt Ahval 
+from gooey import GooeyParser, Gooey
+
+@Gooey(program_name='Sabt ahval')
+
+def main():
+    parser = GooeyParser(description ='enter yout informations')
+    parser.add_argument('name', help ='enter your namer please ')
+    parser.add_argument('family_name', help ='enter your family name please ')
+    parser.add_argument('code', help ='enter your id please ')
+    parser.add_argument('gender', help ='enter your gender please (Male/Female)')
+    parser.add_argument('checklist', widget='FileChooser', default = 'please select your path for check please')
+    parser.add_argument('writechecklist', widget= 'FileSaver', default = ' enter your path please' )
+    args = parser.parse_args()
+
+
+    with open(args.checklist , "r" )as a :
+        file1 = a.read()
+        print(file1)
+    with open(args.writechecklist , "w")as b :
+        b.write(str(args.name))
+        b.write('\n')
+        b.write(str(args.family_name))
+        b.write('\n')
+        b.write(str(args.code))
+        b.write('\n')
+        b.write(str(args.gender))
+
+main()
