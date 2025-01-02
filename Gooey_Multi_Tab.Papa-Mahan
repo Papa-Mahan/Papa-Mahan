@@ -1,0 +1,270 @@
+#Multi tabs in Gooey
+
+#Import Gooey to have our graphical Framework
+from gooey import Gooey, GooeyParser
+
+#Import math to have our mathematical functions
+import math 
+
+#Import date and time to have date in our Gooey
+import datetime
+from calendar import datetime
+from datetime import datetime
+
+#Import random to have a gma e like random game in our Gooey
+from random import randint
+
+#We set the name our program name 
+@Gooey(program_name='Multi tab')
+
+#We make our function name 
+def main():
+    #We set a Description for our Gooey Program
+    parser = GooeyParser(description= 'Multi Tab in Gooey')
+    
+#We set a destination for our App 
+    sp = parser.add_subparsers(dest= 'forfunction')
+#We add a parser intro
+    ap = sp.add_parser('Intro')
+    ag = ap.add_argument_group('Introduction')
+    ag.add_argument('Description', widget='Textarea', gooey_options= {'initial_value': 'Hi, I,m Mahan this is my Gooey code and it do some things and its a multi tab graphical Frame work in this app we have some commands such as(print, mathematical operations, Civil registry,... hope its useful for you guys )', 'height': 70, 'readonly': True })
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it
+    ap1 = sp.add_parser('Edition')
+    ag1 = ap1.add_argument_group('Print anything for you')
+    ag1.add_argument('PrintVar', help= 'enter please everything you want to print for you ', gooey_options= {'initial_value': 'Number/Character: ', 'readonly': True})
+
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it
+    ap2 = sp.add_parser('Conversion')
+    ag2 = ap2.add_argument_group('Changes Rial to Dollar For you')    
+    ag2.add_argument('Dollar', help= 'enter the amount of money that you want to change to dollar', default= '')
+    
+
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it    
+    ap3 = sp.add_parser('Date and Time')
+    ag3 = ap3.add_argument_group('Date time of today')
+    ag3.add_argument('DateTime', widget= 'Textarea', gooey_options= {'readonly': True, 'initial_value': f'{datetime.today()}', 'height': 22})
+    
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it    
+    ap4 = sp.add_parser('Calculator')
+    ag4 = ap4.add_argument_group('Calculator App')
+    ag4.add_argument('num1', help= 'Enter your first number please :')
+    ag4.add_argument('num2' , help= 'Enter your second number please :')
+    ag4.add_argument('MathOp', help='Enter your Mathematical Operations please :')
+
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it
+    ap5 = sp.add_parser('SearchingEngine')
+    ag5 = ap5.add_argument_group('Search and then see what is in your file in DataBase')
+    ag5.add_argument('Searching', widget= 'FileChooser', default= 'please enter the path of your file to see what is in it ')
+    
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it    
+    ap6 = sp.add_parser('RandomGame')
+    ag6 = ap6.add_argument_group('This is a Random game have fun hope you enjoy it')
+    ag6.add_argument('Guess_easy', type=int , help= 'pick a number between 1 to 3 and see if you win or you lose')
+    ag6.add_argument('Guess_medium', type=int , help= 'pick a number between 1 to 10 and see if you win or you lose')
+    ag6.add_argument('Guess_hard', type=int , help= 'pick a number between 1 to 50 and see if you win or you lose')
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it
+    ap7 = sp.add_parser('CivilRegistry')
+    ag7 = ap7.add_argument_group('This is a Civil Registry App')
+    ag7.add_argument('Name', help= 'enter you name please ')
+    ag7.add_argument('Family', help= 'enter you Family name please ')
+    ag7.add_argument('Country', help= 'enter you Country please ')
+    ag7.add_argument('City', help= 'enter you City please ')
+    ag7.add_argument('Id', help= 'enter you Id please ')
+    ag7.add_argument('Age', help= 'enter you Age please ')
+    ag7.add_argument('PhoneNumber', help= 'enter you PhoneNumber please ')
+    ag7.add_argument('Write', widget= 'FileSaver', default= 'Enter the path file you want save')
+
+
+#We set our App parser and the condition and the inputs for it to work and also the group title of it 
+    ap8 = sp.add_parser('EvenOddApp')
+    ag8 = ap8.add_argument_group('Enter your number we say which one is Odd which one is Even')
+    ag8.add_argument('num1', type=int ,help= 'enter your number please ')
+    ag8.add_argument('num2', type=int ,help= 'enter your number please ')
+    ag8.add_argument('num3', type=int ,help= 'enter your number please ')
+    ag8.add_argument('num4', type=int ,help= 'enter your number please ')
+    ag8.add_argument('num5', type=int ,help= 'enter your number please ')
+    ag8.add_argument('num6', type=int ,help= 'enter your number please ')
+    args = parser.parse_args()
+    return args 
+
+def code1(PrintVar) :
+    print(PrintVar)
+
+def code2(Dollar) :
+    a = int('82000')
+    b = int(Dollar) * int(a) 
+    print(f'{Dollar} Rial equal {b} Dollars')
+
+def code3(MathOp,num1,num2) :
+    num1 = int(num1)
+    num2 = int(num2)
+
+    if MathOp == '+' :
+        print(num1 + num2)
+    elif MathOp == '-' :
+        print(num1 - num2)
+    elif MathOp == '/' : 
+       print(num1 / num2)
+    elif MathOp == '*' :
+        print(num1 * num2)
+    else :
+        print('your Mathematical Operation in invalid!!!')
+
+
+def code4(Searching):
+    with open(Searching , 'r') as a :
+        file = a.read()
+        print(file)
+
+def code5(Guess_easy,Guess_medium,Guess_hard):
+    Random_easy =  randint(1, 3)
+    Random_medium = randint(1, 10)
+    Random_hard = randint(1, 50)
+    
+    if Guess_easy == Random_easy :
+        print('Congrats you win')
+        print('10 plus point')
+        print('\n')
+        print(f'the Random number is ---> {Random_easy}')
+        print('\n')
+
+    else :
+        print('Sorry but you lose')
+        print('minus -10 point')
+        print('\n')
+        print(f'the Random number is ---> {Random_easy}')
+        print('\n')
+    
+    if Guess_medium == Random_medium :
+        print('Congrats you win')
+        print('50 plus point')
+        print('\n')
+        print(f'the Random number is ---> {Random_medium}')
+        print('\n')
+    else :
+        print('Sorry but you lose')
+        print('minus -50 point')
+        print('\n')
+        print(f'the Random number is ---> {Random_medium}')
+        print('\n')
+    
+    
+    if Guess_hard == Random_hard :
+        print('Congrats you win')
+        print('10000 plus point')
+        print('\n')
+        print(f'the Random number is ---> {Random_hard}')
+        print('\n')
+    else :
+        print('Sorry but you lose')
+        print('minus -1000 points')
+        print('\n')
+        print(f'the Random number is ---> {Random_hard}')
+        print('\n')
+
+def code6(Name,Family,Id,City,Country,PhoneNumber,Age,Write):
+    with open(Write , "w") as f :
+        f.write(Name)
+        f.write('\n')
+        f.write(Family)
+        f.write('\n')
+        f.write(Id)
+        f.write('\n')
+        f.write(Age)
+        f.write('\n')
+        f.write(City)
+        f.write('\n')
+        f.write(Country)
+        f.write('\n')
+        f.write(PhoneNumber)
+
+def code7(num1,num2,num3,num4,num5,num6) :
+    lst1 = []
+    lst2 = []
+    if num1 % 2 == 0 :
+        print('Your first number is Even')
+        lst1.append(num1)
+    else :
+        print('Your first number is Odd')
+        lst2.append(num1)
+    if num2 % 2 == 0 :
+        print('Your second number is Even')
+        lst1.append(num2)
+    else :
+        print('Your second number is Odd')
+        lst2.append(num2)
+    if num3 % 2 == 0 :
+        print('Your third number is Even')
+        lst1.append(num3)
+    else :
+        print('Your third number is Odd')
+        lst2.append(num3)
+    if num4 % 2 == 0 :
+        print('Your fourth number is Even')
+        lst1.append(num4)
+    else :
+        print('Your fourth number is Odd')
+        lst2.append(num4)
+    if num5 % 2 == 0 :
+        print('Your fifth number is Even')
+        lst1.append(num5)
+    else :
+        print('Your fifth number is Odd')
+        lst2.append(num5)
+    if num6 % 2 == 0 :
+        print('Your sixth number is Even')
+        lst1.append(num6)
+    else :
+        print('Your sixth number is Odd')
+        lst2.append(num6)
+    Total_Even = sum(lst1) 
+    Total_Odd = sum(lst2)
+    print(f'The Sum of Even Numbers is ---> {Total_Even}')
+    print(f'The Sum of Odd Numbers is ---> {Total_Odd}')
+
+
+
+
+#We set a Differnce endings or processing for our each app 
+Code = main()
+#Processing if the Gooey was for Printing 
+if Code.forfunction == 'Edition' :
+    code1(Code.PrintVar)
+
+#Processing if the Gooey was for calculate to Conversion Rial to Dollar 
+if Code.forfunction == 'Conversion' :
+    code2(Code.Dollar)
+
+#Processing if the Gooey was for Calculator 
+if Code.forfunction == 'Calculator' :
+    code3(Code.MathOp, Code.num1, Code.num2)
+
+#Processing if the Gooey was for Read and shows us what is in one of our files in our datebase 
+if Code.forfunction == 'SearchingEngine' :
+    code4(Code.Searching)
+
+#Processing if the Gooey was for Random Game
+if Code.forfunction == 'RandomGame' :
+    code5(Code.Guess_easy, Code.Guess_medium, Code.Guess_hard)
+
+#Processing if the Gooey was for Civil Registry and Write it in our Datebase 
+if Code.forfunction == 'CivilRegistry' :
+    code6(Code.Name, Code.Family, Code.Id, Code.City, Code.Country, Code.Age, Code.PhoneNumber, Code.Write)
+
+#Processing if the Gooey was for Even or Odd App 
+if Code.forfunction == 'EvenOddApp' :
+    code7(Code.num1, Code.num2, Code.num3, Code.num4, Code.num5, Code.num6)
