@@ -1,0 +1,71 @@
+# Meteorology
+import datetime
+from calendar import datetime
+from datetime import datetime
+print('Welcome to our Meteorology')
+print(f"the time and the date of today is {datetime.today()}")
+user = (input('Please enter your username :'))
+password = (input("PLease enter your password :"))
+if len(user) == 0 or len(password) == 0 :
+    print('please fill the blanks (User/Password)')
+else :
+    print('Your account creat successfully')
+    with open("UserPass.txt", "a" ) as UserPass:
+        UserPass.write(str(user))
+        UserPass.write(str(password))
+        while True :  
+            print("1.Iran" "\n" "2.America" "\n" "3.England" "\n" "4.Egypt" "\n" "5.France")
+            Meteorology = int(input('Which conurty you want to see :'))
+            if Meteorology == 1 :
+                print(f'Iran meteorology is 37 degrees ')
+            elif Meteorology == 2 :
+                print(f'America meteorology is -4 degrees ')
+            elif Meteorology == 3 :
+                print(f'England meteorology is 39 degrees ')
+            elif Meteorology == 4 :
+                print(f' Egypt meteorology is 49 degrees ')
+            elif Meteorology == 5 :
+                print(f'France meteorology is 37 degrees ')
+            else :
+                print('Invalid input!!!!')
+            with open("Meteorology.txt", "w") as meteorology:
+                meteorology.write(str(Meteorology))
+                print('Your choose saved in the data base')
+            Continue = input('Do ypu want to continue [Y/N] :?')
+            if Continue == 'Y' :
+                print("program will run again")
+                with open('Continue.txt', 'a')as conti:
+                    conti.write(str(Continue))
+                    conti.write('\n')
+                if Meteorology == 1 :
+                    print(f'Iran meteorology is 37 degrees ')
+                    print('\n')
+                elif Meteorology == 2 :
+                    print(f'America meteorology is -4 degrees ')
+                    print('\n')
+                elif Meteorology == 3 :
+                    print(f'England meteorology is 39 degrees ')
+                    print('\n')
+                elif Meteorology == 4 :
+                    print(f' Egypt meteorology is 49 degrees ')
+                    print('\n')
+                elif Meteorology == 5 :
+                    print(f'France meteorology is 37 degrees ')
+                    print('\n')
+                else :
+                    print('Invalid input!!!!')
+                with open("Meteorology.txt", "w") as meteorology:
+                    meteorology.write(str(Meteorology))
+                    print('Your choose saved in the data base')
+            elif Continue == 'N' :
+                print("Program will stop now")
+                with open('Continue.txt', 'a')as conti_stop:
+                    conti_stop.write(str(Continue))
+                    conti_stop.write('\n')
+                break
+            else :
+                print("Invalid input")
+                with open('Continue.txt', "a") as conti_invalid:
+                    conti_invalid.write(str(Continue))
+                    conti_invalid.write('\n')
+                break
