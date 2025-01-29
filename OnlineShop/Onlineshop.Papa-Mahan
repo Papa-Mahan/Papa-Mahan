@@ -1860,7 +1860,7 @@ l5_n1.place(x=105,y=64)
 l5_n1.place_forget()
 
 #roastbeef
-image_roastbeef1 = Image.open("ساندویچ-چاباتای-رست-بیف.png.jpg").resize((60,80))
+image_roastbeef1 = Image.open("ساندویچ-چاباتای-رست-بیف.jpg").resize((60,80))
 image_roastbeef2 = ImageTk.PhotoImage(image_roastbeef1)
 frame_roastbeef = ttk.Frame(root,style="Custom.TFrame",width=200,height=180,padding=5,borderwidth=15,relief=ttk.GROOVE)
 frame_roastbeef.place(x=245,y=15)
@@ -1933,7 +1933,7 @@ def r_add():
         messagebox.showerror(message='Out of stock')
 
 #chickenbologna
-image_chickenbologna1 = Image.open("ساندویچ-چاباتای-ژامبون-مرغ-دودی-۹۰٪-با-پنیر.png.jpg").resize((60,80))
+image_chickenbologna1 = Image.open("ساندویچ-چاباتای-ژامبون-مرغ-دودی-۹۰٪-با-پنیر.jpg").resize((60,80))
 image_chickenbologna2 = ImageTk.PhotoImage(image_chickenbologna1)
 frame_chickenbologna = ttk.Frame(root,style="Custom.TFrame",width=200,height=180,padding=5,borderwidth=15,relief=ttk.GROOVE)
 frame_chickenbologna.place(x=475,y=15)
