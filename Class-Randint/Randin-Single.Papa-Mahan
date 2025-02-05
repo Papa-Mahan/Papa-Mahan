@@ -1,0 +1,18 @@
+import random 
+from random import randint 
+
+class Randint_game:
+    def __init__(self, guess, randint):
+        self.Guess = guess
+        self.Randint = randint
+        self.Randint = random.randint(1,4)
+        # OPTINAL YOU CAN TURN IT ON FOR CHEAT OR TURN IF OFF TO LET YOUR SENSE GUESS THE NUMBER
+        # print(self.Randint)
+        self.Guess = int(input('Enter your Guess please :'))
+        if self.Randint == self.Guess : 
+            print('correct guess')
+        else :
+            print('wrong guess')        
+    def print_result(self):
+        print(f'The Randint number is {self.Randint}, and the client guess is {self.Guess}')
+Guess_class = Randint_game('', '').print_result()
