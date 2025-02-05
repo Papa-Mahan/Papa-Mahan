@@ -4,7 +4,8 @@ class Randint_Game:
     def __init__(self, randint):
         self.Randint = randint
         self.Randint = random.randint(1,3)
-        print(self.Randint)
+        # OPTINAL YOU CAN TURN IT ON FOR CHEAT OR TURN IF OFF TO LET YOUR SENSE GUESS THE NUMBER
+        # print(self.Randint)        
     def print_randint(self):
         print(f'the generated number by randint is {self.Randint}')
 class Randint_guess(Randint_Game):
