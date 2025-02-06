@@ -1,0 +1,25 @@
+import random 
+from random import randint 
+
+class Randint:
+    def __init__(self):
+        self.Randint = random.randint(1, 3)
+        print(self.Randint)
+    def Print_first_Class(self):
+        print(f'The generated number by randint is {self.Randint}')
+class Guess:
+    def __init__(self):
+        self.Guess = int(input('enter your guess please :'))
+    def Print_second_class(self):
+        print(f'the client guess is {self.Guess}')
+class Final(Randint, Guess):
+    def __init__(self):
+        Randint.__init__(self)
+        Guess.__init__(self)
+        if self.Guess == self.Randint :
+            print('Correct guess')
+        else:
+            print('Wrong guess')
+    def Print_Final(self):
+        print(f'the number that generated with randint is {self.Randint} and the client guess is {self.Guess}')
+Class_Final = Final().Print_Final()
