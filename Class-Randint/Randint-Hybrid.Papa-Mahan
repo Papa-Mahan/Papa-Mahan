@@ -1,0 +1,56 @@
+import random 
+from random import randint 
+class Randint:
+    def __init__(self):
+        self.Randint = random.randint(1, 3)
+        print(self.Randint)
+    def Print_randint(self):
+        print(f'Generated number is {self.Randint}')
+#Class_Randint = Randint().Print_randint()
+class Guess:
+    def __init__(self):
+        self.Guess = int(input('enter your guess please :'))
+    def Print_Guess(self):
+        print(f'The client guess number is {self.Guess}')
+#Class_Guess = Guess().Print_Guess()
+
+class Comparison(Randint, Guess):
+    def __init__(self):
+        Randint.__init__(self)
+        Guess.__init__(self)
+        while True :
+            if self.Randint == self.Guess:
+                print('Correct')
+                break
+            else :
+                print('Wrong guess try again')
+                self.Guess = int(input('enter your guess please :'))
+    def Print_Comparison(self):
+        print(f'the client guess number is {self.Guess} and the generated number is {self.Randint}')
+Class_Comparison = Comparison().Print_Comparison()
+# class Sum(Comparison):
+#     def __init__(self):
+#         Randint.__init__(self)
+#         Guess.__init__(self)
+#         self.Plus = self.Randint + self.Guess
+#     def Print_SUM(self):
+#         print(f'the sum reslt of randint and client guess is {self.Plus}')
+
+# Class_SUM = Sum().Print_SUM()
+#class Times(Randint,Guess):
+#    def __init__(self):
+#        Randint.__init__(self)
+#        Guess.__init__(self)
+#        self.Times = self.Randint * self.Guess
+#    def Print_Times(self):
+#        print(f'The times result of Generated number an Client guess number is {self.Times}')
+#Class_Times = Times().Print_Times()
+# class Final(Comparison, Times):
+#     def __init__(self):
+#         Sum.__init__(self)
+#         Times.__init__(self)
+#         self.Final = self.Plus + self.Times
+#     def Print_Final(self):
+#         print(f'The sum of Comparision and Times class is {self.Final}')
+# Class_Final = Final().Print_Final()
+        
