@@ -1,0 +1,25 @@
+import requests
+
+def api_call_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Calling API...")
+        url = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency_v2.json"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            print("API Call Successful!")
+            return func(data, *args, **kwargs)
+        else:
+            print(f"Error: {response.status_code}")
+            return None
+    return wrapper
+
+@api_call_decorator
+def process_data(data):
+
+    for item in data:
+        print(f"Currency: {item['name']} - Price: {item['price']}")
+
+if __name__ == "__main__":
+    process_data()
