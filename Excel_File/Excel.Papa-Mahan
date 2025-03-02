@@ -1,0 +1,36 @@
+import xlsxwriter
+
+Work_Book_1 = xlsxwriter.Workbook("Excel_File.xlsx")
+
+first_sheet = Work_Book_1.add_worksheet('Sheet_1')
+
+first_sheet.write("A1", "name")
+first_sheet.write("B1", "family_name")
+first_sheet.write("C1", "Phone_Number")
+first_sheet.write("D1", "Gender")
+
+first_sheet.write(1, 0, "{Name}")
+first_sheet.write(1, 1, "{Family_Name}")
+first_sheet.write(1, 2, "{Phone_Number}")
+first_sheet.write(1, 3, "{Gender}")
+
+excel_input_name = str(input('enter your name please :'))
+excel_input_family_name = str(input('enter your family name please :'))
+excel_input_phone_number = str(input('enter your phone number please :'))
+excel_input_gender = str(input('enter your gender please :'))
+
+first_sheet.write(2, 0, excel_input_name)
+first_sheet.write(2, 1, excel_input_family_name)
+first_sheet.write(2, 2, excel_input_phone_number)
+first_sheet.write(2, 3, excel_input_gender)
+
+excel_input_num1 = str(input('enter your first number please : '))
+excel_input_num2 = str(input('enter your seconde number please :'))
+
+first_sheet.write(3, 0, "Result :")
+first_sheet.write(3, 1, int(excel_input_num1))
+first_sheet.write(3, 2, int(excel_input_num2))
+first_sheet.write(3, 3, "=SUM(B4:C4)")
+
+
+Work_Book_1.close()
