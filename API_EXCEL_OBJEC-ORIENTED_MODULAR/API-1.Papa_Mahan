@@ -1,0 +1,27 @@
+import requests
+
+class Class_Gold:
+        def __init__(self):
+            print("Calling API...")
+            self.url_1 = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency_v2.json"
+            self.Response_Code_1 = requests.request("GET", self.url_1).json()
+            # print(Response_Code)
+
+# Resutl_Gold = Class_Gold()
+class Class_Dollor:
+      def __init__(self):
+            self.url_2 = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency_v2.json"
+            self.Response_Code_2 = requests.request("GET", self.url_2).json()
+            # print(Response_Code)
+
+# Result_Dollor = Class_Dollor()
+class Class_Excel(Class_Gold, Class_Dollor):
+    def __init__(self):
+        Class_Gold.__init__(self)
+        Class_Dollor.__init__(self)
+        self.gold_data = self.Response_Code_1["gold"]
+        self.crypto_currency_data = self.Response_Code_2["cryptocurrency"]
+        self.crypto_list = [{"NAME": item["name"], "PRICE": item["price"]} for item in self.crypto_currency_data]
+        self.gold_list = [{"NAME": item["name"], "PRICE": item["price"]} for item in self.gold_data]
+
+Result_Excel = Class_Excel()
