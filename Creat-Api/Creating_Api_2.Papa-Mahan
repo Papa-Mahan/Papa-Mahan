@@ -1,0 +1,59 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+
+class Data_API(BaseModel):
+    Id : int
+    Name : str
+
+
+API = FastAPI()
+
+Data_Base = [
+            
+    {"Id" : 1, "Name" : "Mahan"},
+    {"Id" : 2, "Name" : "Fereshteh"},
+    {"Id" : 3, "Name" : "Ali"},
+    {"Id" : 4, "Name" : "Hengameh"},
+    {"Id" : 5, "Name" : "Homa"},
+    {"Id" : 6, "Name" : "Reza"},
+    {"Id" : 7, "Name" : "Mahdi"},
+
+]
+
+@API.get("/Get")
+def Api_Get():
+    return(Data_Base)
+
+@API.post("/Post_Data/")
+def API_Post(Post_Data : Data_API):
+    Data_Base.append(Post_Data)
+    return(Data_Base)
+
+@API.put("/Put_Data/{Put_ID}")
+def API_Put(Put_ID: int,Put_Data: Data_API):
+    for i,Value_DataBase in enumerate(Data_Base):
+        if Value_DataBase["Id"] == Put_ID:
+            Data_Base[i] = Put_Data.dict()
+            return(Data_Base)
+    raise HTTPException(status_code=404, detail='NOT_FOUND')
+
+
+@API.patch("/Patch_Data/{Patch_ID}")
+def API_Patch(Patch_ID: int, Patch_Data: Data_API):
+    for i,Value_DataBase in enumerate(Data_Base):
+        if Value_DataBase["Id"] == Patch_ID:
+            if Patch_Data.Name:
+                Value_DataBase["Name"] = Patch_Data.Name
+                return(Data_Base)
+
+
+@API.delete("/Delet_Data/{Delet_ID}")
+def API_Delet(Delet_ID: int):
+    for i,Value_DataBase in enumerate(Data_Base):
+        if Value_DataBase["Id"] == Delet_ID:
+            del Data_Base[i]
+            return Data_Base
+    raise HTTPException(status_code=404, detail="NOT FOUND")
+
+
