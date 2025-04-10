@@ -1,0 +1,57 @@
+from fastapi import FastAPI, HTTPException
+import json
+from pydantic import BaseModel
+
+api = FastAPI()
+
+class Data(BaseModel):
+    Asn_Number : str
+    Value: str
+
+@api.get("/")
+def get_api():
+    with open("DB_1.json", "r")as Data_Base:
+        result = json.load(Data_Base)
+        return result
+    
+@api.get("/get_item/{get_item}")
+def get_data(get_item):
+    with open("DB_1.json", "r")as Data_Base:
+        result = json.load(Data_Base)
+        for i in result.keys():
+            if i == get_item:
+                return result[i]
+    raise HTTPException(status_code=404,detail="item not found")
+@api.post("/post_data/")
+def post_data(post_data : Data):
+    with open("DB_1.json", "r")as Data_Base:
+        result = json.load(Data_Base)
+    result[post_data.Asn_Number] = post_data.Value
+    
+    with open("DB_1.json", "w")as Data_Base:
+        json.dump(result, Data_Base, indent=4)
+    return result
+@api.put("/put_data/{put_data}")
+def put_data(put_data : str, data: Data):
+    with open("DB_1.json", "r")as Data_Base:
+        result = json.load(Data_Base)
+    if put_data not in result:
+        raise HTTPException(status_code=404, detail="Not Found")
+    else :
+        result[put_data] = data.Value
+        with open("DB_1.json", "w")as Data_Base:
+            json.dump(result, Data_Base, indent=4)
+            return result
+@api.delete("/Delet_Data/{delet_item}")
+def delet_data(delet_item):
+    with open("DB_1.json", "r")as Data_Base:
+        result = json.load(Data_Base)
+    if delet_item not in result :
+        raise HTTPException(status_code=404, detail="Not found cant delet the item ") 
+    del result[delet_item]
+
+    with open("DB_1.json", "w")as Data_Base:
+        json.dump(result, Data_Base, indent=4)
+        return result
+
+
