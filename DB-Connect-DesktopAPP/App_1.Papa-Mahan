@@ -1,0 +1,53 @@
+import customtkinter
+from customtkinter import *
+import psycopg2
+from tkinter import messagebox
+
+
+
+root = CTk()
+root.geometry('300x300')
+root.title("Login Page")
+root.resizable(False , False)
+customtkinter.set_appearance_mode('dark')
+
+def submit():
+    ename = Entry_name.get()
+    efamily = Entry_family.get()
+    eage = Entry_age.get()
+    enumber = Entry_number.get()
+    Connection_to_DB = psycopg2.connect(host = '127.0.0.1', port = 5432, database = 'postgres', 
+                                        user = 'postgres', password = 'Mbanba84@54')  
+    Connection_Final = Connection_to_DB.cursor()
+    Connection_Final.execute("select * from papa_table")
+    # print(Connection_Final.fetchall())
+    for name , family, age, number  in Connection_Final.fetchall():
+        if name == ename and family == efamily and age == eage and number == enumber:
+            messagebox.showerror("result", "User exists")
+            break
+        else :
+            Connection_Final.execute("insert into papa_table(name, family, age, number) values(%s, %s, %s, %s)", (ename, efamily, eage, enumber))
+            Connection_to_DB.commit() 
+            break
+    
+    
+    
+lable_name = CTkLabel(root, text='Name', font=('tahoma', 15))
+lable_name.place(x = 10 , y = 10)
+lable_family =  CTkLabel(root, text='Family', font=('tahoma', 15))
+lable_family.place(x = 10 , y = 50)
+lable_age = CTkLabel(root , text='age', font=('tahoma', 15))
+lable_age.place(x = 10 , y = 90)
+lable_number = CTkLabel(root , text='number', font=('tahoma', 15))
+lable_number.place(x = 10 , y = 130)
+Entry_name = CTkEntry(root, placeholder_text='please enter your name')
+Entry_name.place(x = 70 , y = 10 )
+Entry_family = CTkEntry(root, placeholder_text='please enter your family')
+Entry_family.place(x = 70 , y = 50 )
+Entry_age = CTkEntry(root, placeholder_text='please enter your age')
+Entry_age.place(x = 70, y = 90)
+Entry_number = CTkEntry(root, placeholder_text='please enter your number ')
+Entry_number.place(x = 70 , y = 130)
+button_submit = CTkButton(root, text='submit', command=submit, fg_color='red')
+button_submit.place(x = 70 , y = 170)
+root.mainloop()
