@@ -1,0 +1,17 @@
+from bs4 import BeautifulSoup
+import requests
+
+
+url = "https://www.worldometers.info/coronavirus/"
+Result_Url = requests.get(url)
+
+
+bs4_Result = BeautifulSoup(Result_Url.text , "html.parser")
+Result_Tabel = bs4_Result.find('table', attrs={"id": "main_table_countries_today"})
+Result_TBody = Result_Tabel.find('tbody')
+Result_Tr = Result_TBody.find_all('tr')
+for i in Result_Tr:
+    request_td = i.find_all('td')
+    print("The country name is {} and the death of that country in COVID duration was {}".format(request_td[1].text, request_td[4].text))
+with open("file.txt", 'w')as f :
+    f.write(str(Result_Tr))
