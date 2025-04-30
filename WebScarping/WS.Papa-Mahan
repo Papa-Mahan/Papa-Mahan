@@ -1,0 +1,14 @@
+from bs4 import BeautifulSoup
+import requests
+
+url_site = "https://www.tiobe.com/tiobe-index/"
+Result_Url = requests.get(url_site)
+# print(Result_Url.text)
+Bs4_Result = BeautifulSoup(Result_Url.text, "html.parser")
+Result_Table = Bs4_Result.find("table", attrs={"class": "table table-striped table-top20"})
+Result_TBody = Result_Table.find("tbody")
+Result_Tr = Result_TBody.find_all('tr')
+for i in Result_Tr:
+    request_td = i.find_all("td")
+    print("the programming langues is and {} and the rating of it in 2025 is {} and the change of it is {}".format(
+        request_td[4].text , request_td[5].text , request_td[6].text))
