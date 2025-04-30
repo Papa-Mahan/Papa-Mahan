@@ -1,0 +1,5 @@
+import requests
+
+url_rnpg = "https://rnpg.ir/fa/"
+Result_Final = requests.get(url_rnpg)
+print(Result_Final.text)
