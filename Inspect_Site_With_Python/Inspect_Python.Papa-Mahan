@@ -1,5 +1,5 @@
 import requests
 
-url_rnpg = "https://rnpg.ir/fa/"
+url_rnpg = "<Url of that webpage or website>"
 Result_Final = requests.get(url_rnpg)
 print(Result_Final.text)
