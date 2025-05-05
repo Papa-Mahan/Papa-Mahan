@@ -1,0 +1,15 @@
+import re
+var = """"Salam be Doostan azizm be kelas CEH khosh omadin
+address kelas dar majmoe 201 hastesh 
+Address gmail ma mahanCEH201@gmail.com hastesh
+Shomare telephone man 09013164218
+Address site https://CEHmahan201.net hastesh 
+Omidvaram class KH0B va Mofid b@ratoon bashe"""
+
+Result_1 = re.findall("http?s://[a-zA-Z0-9]*\.[a-zA-Z]*\S", var)
+print(Result_1)
+
+
+#Site Extreactor --------------------> "http?s://[a-zA-Z0-9]*\.[a-zA-Z]*\S"
+#Gmail Extractor --------------------> \s\d[0-9]\d*
+#Phone number Extractor --------------------> \S*[a-zA-Z0-9]@[a-zA-Z]*\.[a-zA-Z]*\S
