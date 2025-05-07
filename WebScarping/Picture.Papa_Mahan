@@ -1,0 +1,19 @@
+from bs4 import BeautifulSoup
+import requests
+import os 
+
+url = "<SITE_NAME>"
+os.makedirs("TEST_PIC", exist_ok=True)
+Request_for_Pic = requests.get(url).text
+Request_for_HTMl = BeautifulSoup(Request_for_Pic ,"html.parser")
+Request_for_img = Request_for_HTMl.find_all("img")
+List_Pic = []
+for i in Request_for_img:
+    List_Pic.append(i.get("src"))
+print(List_Pic)
+for i in range(len(List_Pic)):
+    filename = os.path.join('TEST_PIC', f'{i}.jpeg')
+    Download_Pic = requests.get(List_Pic[i]).content
+    with open(filename, 'wb')as Picture:
+        Picture.write(Download_Pic)
+        print(f'File {i+1} Downloaded')
