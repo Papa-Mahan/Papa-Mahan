@@ -1,0 +1,29 @@
+from bs4 import BeautifulSoup
+import requests
+import os 
+
+
+os.makedirs("Video", exist_ok=True)
+class Data_Video():
+    def __init__(self):
+        list_Download_Video = []
+        self.url = "https://www.sample-videos.com/"
+        self.Result_Url = requests.get(self.url)
+        self.Result_HTML = BeautifulSoup(self.Result_Url.text, "html.parser")
+        self.Result_Tag_A = self.Result_HTML.find_all("a", attrs={"class": "download_video"}, href = True)
+        for i in self.Result_Tag_A:
+            var_href = i["href"]
+            if var_href.endswith(".mp4"):
+                # print(var_href)
+                list_Download_Video.append(f'{self.url}{var_href}')
+        # print(list_Download_Video)
+        for j in range(len(list_Download_Video)):
+            file_name = os.path.join("Video", f'Video{j}.mp4')
+            request_download = requests.request("GET",list_Download_Video[j]).content
+            with open(file_name, "wb")as Download_video:
+                Download_video.write(request_download)
+                print(f"Video {j} Downloaded")
+        print("All videos downloaded")
+        
+Result_Class = Data_Video()
+
