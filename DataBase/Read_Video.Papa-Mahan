@@ -1,0 +1,19 @@
+import psycopg2
+import os 
+
+Directory = "Video"
+
+Connect_To_DB = psycopg2.connect(host = "127.0.0.1", port = "5432", user = "postgres", 
+                                 password = "Mbanba84@54", database = "postgres")
+DB_Cursor = Connect_To_DB.cursor()
+
+
+
+
+for Video in os.listdir(Directory):
+    File_Name = os.path.join(Directory, Video)
+    with open(File_Name, 'rb')as Video_Read:
+        Result = Video_Read.read()
+    DB_Cursor.execute("select * from Videos")
+    Result_Final = DB_Cursor.fetchall()
+    print(Result_Final)
