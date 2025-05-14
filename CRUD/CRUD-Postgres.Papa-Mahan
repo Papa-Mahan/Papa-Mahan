@@ -1,0 +1,162 @@
+import tkinter as tk
+from tkinter import messagebox
+import psycopg2
+
+def connect_db():
+    try:
+        conn = psycopg2.connect(
+            host="127.0.0.1", port="5432", database="CRUD_DB",
+              user="postgres", password="Mbanba84@54?!@")
+        return conn
+    except Exception as e:
+        messagebox.showerror("Error", f"Database connection failed")
+
+def login_window():
+    window = tk.Tk()
+    window.title("Login")
+    window.geometry("300x200")
+
+    tk.Label(window, text="First Name:").place(x=50, y=30)
+    first_name_entry = tk.Entry(window)
+    first_name_entry.place(x=150, y=30)
+    
+    tk.Label(window, text="Last Name:").place(x=50, y=70)
+    last_name_entry = tk.Entry(window)
+    last_name_entry.place(x=150, y=70)
+    
+    def login():
+        first_name = first_name_entry.get().strip()
+        last_name = last_name_entry.get().strip()
+        
+        if not first_name or not last_name:
+            messagebox.showwarning("Warning", "Please enter both first and last name")
+            return
+        
+        window.destroy()
+        main_window(first_name, last_name)
+    
+    tk.Button(window, text="Login", command=login).place(x=120, y=120)
+    
+    window.mainloop()
+
+def main_window(first_name, last_name):
+    window = tk.Tk()
+    window.title("User Management")
+    window.geometry("400x400")
+    
+    tk.Label(window, text=f"Welcome: {first_name} {last_name}").place(x=10, y=10)
+    
+    tk.Label(window, text="First Name:").place(x=20, y=50)
+    entry_first = tk.Entry(window)
+    entry_first.place(x=90, y=50, width=200)
+    
+    tk.Label(window, text="Last Name:").place(x=20, y=90)
+    entry_last = tk.Entry(window)
+    entry_last.place(x=90, y=90, width=200)
+    
+    listbox = tk.Listbox(window, width=50, height=10)
+    listbox.place(x=50, y=180)
+    
+    def load_users():
+        listbox.delete(0, tk.END)
+        conn = connect_db()
+        if conn:
+            try:
+                cur = conn.cursor()
+                cur.execute("SELECT id, first_name, last_name FROM users ORDER BY last_name, first_name")
+                for user in cur.fetchall():
+                    listbox.insert(tk.END, f"{user[0]}: {user[1]} {user[2]}")
+                cur.close()
+                conn.close()
+            except Exception as e:
+                messagebox.showerror("Error", f"Error loading users")
+    
+    def add_user():
+        first = entry_first.get().strip()
+        last = entry_last.get().strip()
+        
+        if not first or not last:
+            messagebox.showwarning("Warning", "Please enter both first and last name")
+            return
+        
+        conn = connect_db()
+        if conn:
+            try:
+                cur = conn.cursor()
+                cur.execute(
+                    "INSERT INTO users (first_name, last_name) VALUES (%s, %s)",
+                    (first, last)
+                )
+                conn.commit()
+                cur.close()
+                conn.close()
+                load_users()
+                entry_first.delete(0, tk.END)
+                entry_last.delete(0, tk.END)
+            except psycopg2.IntegrityError:
+                messagebox.showwarning("Warning", "User already exists")
+            except Exception as e:
+                messagebox.showerror("Error", f"Error adding user")
+    
+    def update_user():
+        selection = listbox.curselection()
+        if not selection:
+            messagebox.showwarning("Warning", "Please select a user first")
+            return
+        
+        user_id = listbox.get(selection[0]).split(":")[0]
+        first = entry_first.get().strip()
+        last = entry_last.get().strip()
+        
+        if not first or not last:
+            messagebox.showwarning("Warning", "Please enter both first and last name")
+            return
+        
+        conn = connect_db()
+        if conn:
+            try:
+                cur = conn.cursor()
+                cur.execute(
+                    "UPDATE users SET first_name = %s, last_name = %s WHERE id = %s",
+                    (first, last, user_id)
+                )
+                conn.commit()
+                cur.close()
+                conn.close()
+                load_users()
+            except psycopg2.IntegrityError:
+                messagebox.showwarning("Warning", "User already exists")
+            except Exception as e:
+                messagebox.showerror("Error", f"Error updating user")
+    
+    def delete_user():
+        selection = listbox.curselection()
+        if not selection:
+            messagebox.showwarning("Warning", "Please select a user first")
+            return
+        
+        if not messagebox.askyesno("Confirm", "Are you sure you want to delete this user?"):
+            return
+        
+        user_id = listbox.get(selection[0]).split(":")[0]
+        conn = connect_db()
+        if conn:
+            try:
+                cur = conn.cursor()
+                cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+                conn.commit()
+                cur.close()
+                conn.close()
+                load_users()
+            except Exception as e:
+                messagebox.showerror("Error", f"Error deleting user")
+    
+    tk.Button(window, text="Add", command=add_user).place(x=90, y=130)
+    tk.Button(window, text="Update", command=update_user).place(x=140, y=130)
+    tk.Button(window, text="Delete", command=delete_user).place(x=210, y=130)
+    
+    load_users()
+    window.mainloop()
+
+if __name__ == "__main__":
+    login_window()
