@@ -1,0 +1,16 @@
+import psycopg2
+import os 
+
+Connection_To_DB = psycopg2.connect(host = "127.0.0.1", user = "postgres", 
+                                    password = "Mbanba84@54", port = "5432" , database = "postgres")
+DB_Cursor = Connection_To_DB.cursor()
+
+
+Directory = "Video"
+for Video_Name in os.listdir(Directory):
+    File_Name = os.path.join(Directory, Video_Name)
+    with open(File_Name, "rb")as Read_Video:
+        Result = Read_Video.read()
+    DB_Cursor.execute("insert into Videos(name , content) values(%s , %s)", (Video_Name , Result))
+    Connection_To_DB.commit()
+    
