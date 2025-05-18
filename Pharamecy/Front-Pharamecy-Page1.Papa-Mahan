@@ -1,0 +1,165 @@
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+from PyQt6.QtCore import *
+from PyQt6.QtMultimedia import *
+from PyQt6.QtMultimediaWidgets import *
+import sys
+
+
+class Login_Page(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.acceptDrops
+        #Set_Geometry for our app
+        self.setGeometry(0, 0, 900, 450)
+        #Set_Title for our app
+        self.setWindowTitle('App_Pharmacy Login\Sign_in')
+        #Codes for our app photos
+        self.Lable_Photo = QLabel(self)
+        
+        self.Photo_1 = QPixmap('C:\\Users\msi\Desktop\IT\Python scenario(Zamanpour)\Pharamecy\Pharamercy_2.png')
+
+        self.Lable_Photo.setGeometry(-600, 0, 0, 0)
+
+        self.Lable_Photo.setPixmap(self.Photo_1)
+
+        self.Lable_Photo.resize(self.Photo_1.width(),
+        self.Photo_1.height())
+
+        #Set a button for our Sign_in Page and its sytle
+        self.SignIn_Button = QPushButton('Sign in', self)
+        self.SignIn_Button.setGeometry(50, 320, 55, 29)
+        self.SignIn_Button.setStyleSheet("""
+    QPushButton {
+        background-color: white; 
+        color: black;              
+        border-radius: 10px;               
+        font-size: 12px;
+        border: 2px solid black;
+    }
+    QPushButton:hover {
+        background-color: light blue;  
+    }
+    QPushButton:pressed {
+        background-color: grey;
+    }
+""")
+        #Set a button for our Login Page and its sytle
+        self.Login_Button = QPushButton('Login', self)
+        self.Login_Button.setGeometry(130, 320, 55, 29)
+        self.Login_Button.setStyleSheet("""
+    QPushButton {
+        background-color: white; 
+        color: black;              
+        border-radius: 10px;               
+        font-size: 12px;
+        border: 2px solid black;
+    }
+    QPushButton:hover {
+        background-color: light blue;  
+    }
+    QPushButton:pressed {
+        background-color: grey;
+    }
+""")
+    
+        #Set our Welcome Lable
+        self.Lable_Welcome = QLabel("Welcome", self)
+        self.Lable_Welcome.setGeometry(0, 0, 300, 30)
+        self.Lable_Welcome.setFont(QFont("Courier", 25))
+        #Set Animation for our lable
+        self.Welocome = QPropertyAnimation(self.Lable_Welcome, b"pos")
+        self.Welocome.setDuration(3000)
+        self.Welocome.setStartValue(QPoint(-260,150))
+        self.Welocome.setEndValue(QPoint(50,150))
+        self.Welocome.setEasingCurve(QEasingCurve.Type.OutBounce)
+        self.Welocome.start()
+
+        #Set our To Lable
+        self.Lable_To = QLabel('to', self)
+        self.Lable_To.setGeometry(0, 0, 300, 30)
+        self.Lable_To.setFont(QFont("Courier", 18))
+        #Set Animation for our lable
+        self.pause1 = QPauseAnimation(3000)
+        self.To = QPropertyAnimation(self.Lable_To, b"pos")
+        self.To.setDuration(3000)
+        self.To.setStartValue(QPoint(60, -260))
+        self.To.setEndValue(QPoint(60, 180))
+        self.To.setEasingCurve(QEasingCurve.Type.OutBounce)
+        self.To.start()
+
+        #Set our Our Lable
+        self.Lable_Our = QLabel('our', self)
+        self.Lable_Our.setGeometry(0, 0, 300, 30)
+        self.Lable_Our.setFont(QFont("Courier", 18))
+        #Set Animation for our lable
+        self.Our = QPropertyAnimation(self.Lable_Our, b"pos")
+        self.Our.setDuration(3000)
+        self.Our.setStartValue(QPoint(60, -260))
+        self.Our.setEndValue(QPoint(100, 180))
+        self.Our.setEasingCurve(QEasingCurve.Type.OutBounce)
+        self.Our.start()        
+        #Set our Pharamecy Lable
+        self.Lable_Pharamecy = QLabel('Pharmecy', self)
+        self.Lable_Pharamecy.setGeometry(0, 0, 300, 45)
+        self.Lable_Pharamecy.setFont(QFont("Times", 25))
+        self.Lable_Pharamecy.setStyleSheet("QLabel {color : green;}")
+        #Set Animation for our lable
+        self.Pharmecy = QPropertyAnimation(self.Lable_Pharamecy, b'pos')
+        self.Pharmecy.setDuration(3000)
+        self.Pharmecy.setStartValue(QPoint(-260, 150))
+        self.Pharmecy.setEndValue(QPoint(50, 200))
+        self.Pharmecy.setEasingCurve(QEasingCurve.Type.OutBounce)
+        self.Pharmecy.start() 
+        #Set our Note Lable
+        self.Lable_Note = QLabel("Health is important!", self)
+        self.Lable_Note.setFont(QFont("Times", 8))
+        self.Lable_Note.setGeometry(52, 230, 7000, 45)
+        self.Lable_Note.setStyleSheet("QLabel {color : grey;}")
+        self.Lable_Note.setGraphicsEffect(QGraphicsOpacityEffect(self))
+        self.Lable_Note.graphicsEffect().setOpacity(0)
+        #Set Animation for our lable
+        self.Note = QPropertyAnimation(self.Lable_Note.graphicsEffect(), b'opacity')
+        self.Note.setDuration(1000)
+        self.Note.setStartValue(0)
+        self.Note.setEndValue(1)
+        
+        #Set our See More Button Page Lable
+        self.Button_SeeMore = QPushButton("See More", self)
+        self.Button_SeeMore.setFont(QFont("Times", 8))
+        self.Button_SeeMore.setGeometry(52, 270, 100, 30)
+        self.Button_SeeMore.setStyleSheet("""
+        QPushButton {
+            background-color: #00FF7F; 
+            color: black;              
+            border-radius: 10px;               
+            font-size: 12px;
+            border: 2px solid black;
+        }
+        QPushButton:hover {
+            background-color: white;  
+        }
+        QPushButton:pressed {
+            background-color: white;
+        }
+    """)
+        self.Button_SeeMore.setGraphicsEffect(QGraphicsOpacityEffect(self))
+        self.Button_SeeMore.graphicsEffect().setOpacity(0)
+        #Set Animation for our lable
+        self.SeeMore = QPropertyAnimation(self.Button_SeeMore.graphicsEffect(), b'opacity')
+        self.SeeMore.setDuration(1000)
+        self.SeeMore.setStartValue(0)
+        self.SeeMore.setEndValue(1)
+
+        self.Pharmecy.finished.connect(self.Note.start)
+        self.Pharmecy.finished.connect(self.SeeMore.start)
+
+
+        
+
+
+if __name__ == "__main__":
+    App_Pharmacy = QApplication(sys.argv)
+    Window_Login = Login_Page() 
+    Window_Login.show()
+    sys.exit(App_Pharmacy.exec())
